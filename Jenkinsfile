@@ -10,6 +10,7 @@ pipeline {
                     try {
                       url: 'https://github.com/decheverri123/gittea.git'
                 echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
+                getRepoURL()
                         setBuildStatus("Build complete", "SUCCESS")
                     } catch (Exception e) {
                         setBuildStatus("Build failed", "FAILURE")
@@ -31,4 +32,9 @@ void setBuildStatus(String message, String state) {
         errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
         statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
     ])
+}
+
+def getRepoURL() {
+  sh "git config --get remote.origin.url > .git/remote-url"
+  return readFile(".git/remote-url").trim()
 }
