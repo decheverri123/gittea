@@ -9,6 +9,7 @@ pipeline {
                 script {
                     try {
                       url: 'https://github.com/decheverri123/gittea.git'
+                      bat 'test'
                 echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
                 getRepoURL()
                         setBuildStatus("Build complete", "SUCCESS")
