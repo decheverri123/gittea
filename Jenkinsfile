@@ -7,7 +7,14 @@ pipeline {
             steps{
                 url: 'https://github.com/decheverri123/gittea'
                 echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
-                setBuildStatus("Build complete", "SUCCESS")
+                script {
+                    try {
+                        setBuildStatus("Build complete", "SUCCESS")
+                    } catch (Exception e) {
+                        setBuildStatus("Build failed", "FAILURE")
+                        throw e
+                    }
+                }
             }
         }
 
