@@ -5,10 +5,11 @@ pipeline {
 
         stage('Checkout'){
             steps{
-                url: 'https://github.com/decheverri123/gittea.git'
-                echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
+
                 script {
                     try {
+                      url: 'https://github.com/decheverri123/gittea.git'
+                echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
                         setBuildStatus("Build complete", "SUCCESS")
                     } catch (Exception e) {
                         setBuildStatus("Build failed", "FAILURE")
