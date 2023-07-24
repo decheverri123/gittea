@@ -6,17 +6,7 @@ pipeline {
         stage('Checkout'){
             steps{
 
-                script {
-                    try {
-                      url: 'https://github.com/decheverri123/gittea.git'
-                echo "Git information: ${env.GIT_URL} and ${env.GIT_BRANCH}"
-                getRepoURL()
-                        setBuildStatus("Build complete", "SUCCESS")
-                    } catch (Exception e) {
-                        setBuildStatus("Build failed", "FAILURE")
-                        throw e
-                    }
-                }
+               bat 'step'
             }
         }
 
